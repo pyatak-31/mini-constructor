@@ -6,7 +6,12 @@
             v-model="moduleData.title"
         />
         
-        <textarea cols="30" rows="10" v-model="moduleData.description"></textarea>
+        <ui-textarea
+            rows="5"
+            :id="`description_${ templateData.id }`"
+            label="Описание"
+            v-model="moduleData.description"
+        />
     </section>
 </template>
 
@@ -14,7 +19,10 @@
     export default {
         name: 'ModuleText',
         
-        components: { UiInput: () => import('@/components/ui/input/UiInput.vue') },
+        components: {
+            UiInput: () => import('@/components/ui/input/UiInput.vue'),
+            UiTextarea: () => import('@/components/ui/textarea/UiTextarea.vue')
+        },
 
         props: {
             templateData: {

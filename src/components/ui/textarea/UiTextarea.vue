@@ -1,15 +1,17 @@
 <template>
     <div class="form-input">
-        <input
-            :type="type"
+        <textarea
             :id="id"
             class="form-input__field"
-            :class="{ 'form-input__field--error': error }"
+            :class="{
+                'form-input__field--error': error,
+                'form-input__field--disable-resize': !enableResize,
+            }"
             :required="required"
             v-bind="$attrs"
             :value="value"
             @input="onChange($event)"
-        >
+        ></textarea>
 
         <label
             :for="id"
@@ -30,18 +32,15 @@
 
 <script>
 export default {
-    name: 'UiInput',
+    name: 'UiTextarea',
 
     props: {
         id: String,
         label: String,
-        type: {
-            type: String,
-            default: 'text'
-        },
         value: [String, Number],
         required: Boolean,
         error: String,
+        enableResize: Boolean,
     },
 
     methods: {
@@ -80,6 +79,7 @@ export default {
             @include font($text-color, 14px, 20px, 400);
             border: 1px solid $grey-2;
             border-radius: 4px;
+            @include scrollbar();
 
             &::placeholder {
                 color: $grey-1;
@@ -91,6 +91,10 @@ export default {
                 & + .form-input__label {
                     font-weight: 700;
                 }
+            }
+
+            &--disable-resize {
+                resize: none;
             }
 
             &--error {
