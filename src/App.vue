@@ -1,28 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="constructor">
+        <module-sidebar class="constructor__options" />
+       
+        <module-editing class="constructor__editing" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ModuleSidebar: () => import('@/components/module/options/ModuleOptions.vue'),
+    ModuleEditing: () => import('@/components/module/editing/ModuleEditing.vue')
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    $block-padding: 30px;
+
+    .constructor {
+        position: relative;
+        display: flex;
+        min-height: 100vh;
+        
+        &__options {
+            position: relative;
+            padding: $block-padding;
+        }
+        
+        &__editing {
+            flex: 1;
+            padding: $block-padding;
+            background-color: $main-bg;
+            overflow-x: auto;
+        }
+    }
 </style>
