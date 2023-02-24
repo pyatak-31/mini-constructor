@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="constructor">
-        <module-sidebar class="constructor__options" />
+        <module-sidebar
+            class="constructor__options"
+            @onSaveTemplate="saveTemplates"
+        />
        
         <module-editing
             class="constructor__editing"
@@ -12,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'App',
@@ -39,8 +42,16 @@ export default {
     },
 
     methods: {
+        ...mapActions('templates', {
+            SAVE_TEMPLATES: 'saveTemplates'
+        }),
+
         syncWithStorage() {
             this.templates = JSON.parse(JSON.stringify(this.TEMPLATES));
+        },
+
+        saveTemplates() {
+            this.SAVE_TEMPLATES(this.templates);
         }
     },
 

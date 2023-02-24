@@ -17,8 +17,6 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    
     export default {
         name: 'ModuleEditing',
 
@@ -35,7 +33,7 @@
 
         methods: {
             changeTemplateData(data) {
-                const index = this.templates.findIndex(template => template.id === data.id)
+                const index = this.templates.findIndex(template => template.id === data.id);
                 this.templates.splice(index, 1, data);
             }
         },

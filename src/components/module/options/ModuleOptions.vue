@@ -1,12 +1,33 @@
 <template>
     <aside class="options">
         Sidebar
+
+        <ui-button
+            theme="success"
+            @onClick="saveTemplates"
+        >
+            <template #left-icon>
+                a
+            </template>
+            Save
+        </ui-button>
+        
     </aside>
 </template>
 
 <script>
     export default {
         name: 'ModuleOptions',
+        
+        components: {
+            UiButton: () => import('@/components/ui/button/UiButton.vue'),
+        },
+
+        methods: {
+            saveTemplates() {
+                this.$emit('onSaveTemplate');
+            }
+        }
     }
 </script>
 

@@ -16,6 +16,6 @@ const mock = [
 ]
 
 export default ({
-    templates: JSON.parse(localStorage.getItem('templates')) || mock,
+    templates: JSON.parse(localStorage.getItem('templates')) || [],
 
 });
