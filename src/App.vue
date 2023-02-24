@@ -3,19 +3,50 @@
     <div class="constructor">
         <module-sidebar class="constructor__options" />
        
-        <module-editing class="constructor__editing" />
+        <module-editing
+            class="constructor__editing"
+            :templates="templates"
+        />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
-  name: 'App',
-  components: {
-    ModuleSidebar: () => import('@/components/module/options/ModuleOptions.vue'),
-    ModuleEditing: () => import('@/components/module/editing/ModuleEditing.vue')
-  }
+    name: 'App',
+    components: {
+        ModuleSidebar: () => import('@/components/module/options/ModuleOptions.vue'),
+        ModuleEditing: () => import('@/components/module/editing/ModuleEditing.vue')
+    },
+
+    data() {
+        return {
+            templates: [],
+        }
+    },
+
+    computed: {
+        ...mapGetters('templates', {
+            HAS_TEMPLATES_IN_STORAGE: 'hasTemplates',
+            TEMPLATES: 'sotredTemplates'
+        }),
+
+        hasTemplates() {
+            return Boolean(this.templates.length);
+        }
+    },
+
+    methods: {
+        syncWithStorage() {
+            this.templates = JSON.parse(JSON.stringify(this.TEMPLATES));
+        }
+    },
+
+    mounted() {
+        this.syncWithStorage();
+    }
 }
 </script>
 
