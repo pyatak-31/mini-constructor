@@ -9,13 +9,15 @@
         <module-editing
             class="constructor__editing"
             :templates="templates"
+            @onDragStart="onDragStartEditingTemplate"
+            @onDrop="onDrop"
         />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
     name: 'App',
@@ -27,13 +29,13 @@ export default {
     data() {
         return {
             templates: [],
+            dragEditItemIndex: null,
         }
     },
 
     computed: {
-        ...mapGetters('templates', {
-            HAS_TEMPLATES_IN_STORAGE: 'hasTemplates',
-            TEMPLATES: 'sotredTemplates'
+        ...mapState('templates', {
+            TEMPLATES: 'templates'
         }),
 
         hasTemplates() {
@@ -52,6 +54,22 @@ export default {
 
         saveTemplates() {
             this.SAVE_TEMPLATES(this.templates);
+        },
+
+        onDragStartEditingTemplate(index) {
+            if (this.dragEditItemIndex != index) {
+                this.dragEditItemIndex = index;
+            }
+            console.log(index)
+        },
+
+        onDrop(index) {
+            if (!this.dragEditItemIndex) return false;
+            console.log(index)
+            if (this.dragEditItemIndex != index) {
+                this.templates[this.dragEditItemIndex] = this.templates.splice(index, 1, this.templates[this.dragEditItemIndex])[0];
+            }
+            this.dragEditItemIndex = null;
         }
     },
 

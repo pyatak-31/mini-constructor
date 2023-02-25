@@ -89,10 +89,6 @@
                 this.$emit('onClick');
             }
         },
-
-        mounted() {
-            console.log(this.$slots);
-        }
     };
 </script>
 

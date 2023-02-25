@@ -2,6 +2,12 @@
     <aside class="options">
         Sidebar
 
+        <div
+            class="template__item"
+            draggable="true"
+            @dragstart="onDragStart"
+        ></div>
+
         <ui-button
             theme="success"
             @onClick="saveTemplates"
@@ -24,9 +30,24 @@
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
         },
 
+        data() {
+            return {
+                templates: [
+                    {
+                        id: 1,
+                        name: 'ModuleText',
+                    }
+                ],
+            }
+        },
+
         methods: {
             saveTemplates() {
                 this.$emit('onSaveTemplate');
+            },
+
+            onDragStart() {
+                console.log('hi');
             }
         }
     }
@@ -35,9 +56,19 @@
 <style lang="scss" scoped>
     $width: 300px;
 
-.options {
-    width: $width;
-    background-color: $white;
-    box-shadow: 0 0 15px -15px $dark;
-}
+    .options {
+        width: $width;
+        background-color: $white;
+        box-shadow: 0 0 15px -15px $dark;
+    }
+
+    .template {
+
+
+        &__item {
+            width: 50px;
+            height: 50px;
+            background-color: $primary;
+        }
+    }
 </style>
