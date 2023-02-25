@@ -7,7 +7,7 @@
             @onClick="saveTemplates"
         >
             <template #left-icon>
-                a
+                <ui-icon name="save" />
             </template>
             Save
         </ui-button>
@@ -21,6 +21,7 @@
         
         components: {
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
+            UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
         },
 
         methods: {

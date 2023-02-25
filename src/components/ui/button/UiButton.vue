@@ -59,7 +59,7 @@
                 return result;
             },
             
-            hasRightIcon(){
+            hasRightIcon() {
                 return Boolean(this.$slots['right-icon']);
             },
 
@@ -73,11 +73,11 @@
 
             iconClass() {
                 let result = `button__icon`;
-                if (!this.hasText.value) {
+                if (!this.hasText) {
                     result += ' button__icon--only';
-                } else if (this.hasText.value && this.hasRightIcon.value) {
+                } else if (this.hasText && this.hasRightIcon) {
                     result += ' button__icon--right';
-                } else if (this.hasText.value && this.hasLeftIcon.value) {
+                } else if (this.hasText && this.hasLeftIcon) {
                     result += ' button__icon--left';
                 }
                 return result;
@@ -91,7 +91,7 @@
         },
 
         mounted() {
-            console.log(this.$slots)
+            console.log(this.$slots);
         }
     };
 </script>
