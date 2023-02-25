@@ -6,6 +6,7 @@
             class="template__item"
             draggable="true"
             @dragstart="onDragStart"
+            @dragend="onDragEnd"
         ></div>
 
         <ui-button
@@ -47,7 +48,11 @@
             },
 
             onDragStart() {
-                console.log('hi');
+                this.$emit('onDragStart', 'ModuleText');
+            },
+
+            onDragEnd() {
+                this.$emit('onDragEnd');
             }
         }
     }

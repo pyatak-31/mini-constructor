@@ -4,13 +4,19 @@
         <module-sidebar
             class="constructor__options"
             @onSaveTemplate="saveTemplates"
+            @onDragStart="onDragStartNewTemplate"
+            @onDragEnd="onDragEndNewTemplate"
         />
        
         <module-editing
             class="constructor__editing"
             :templates="templates"
+            :isDragEditingTemplate="isDragEditingTemplate"
+            :isDragNewTemplate="isDragNewTemplate"
             @onDragStart="onDragStartEditingTemplate"
             @onDrop="onDrop"
+            @onDropNewTemplate="onDropNewTemplate"
+            @onDragEndEditingTemplate="onDragEndEditingTemplate"
         />
     </div>
   </div>
@@ -29,7 +35,8 @@ export default {
     data() {
         return {
             templates: [],
-            dragEditItemIndex: null,
+            dragEditingTemplateIndex: null,
+            dragNewTemplateName: null,
         }
     },
 
@@ -40,7 +47,15 @@ export default {
 
         hasTemplates() {
             return Boolean(this.templates.length);
-        }
+        },
+
+        isDragEditingTemplate() {
+            return Boolean(this.dragEditingTemplateIndex != null);
+        },
+
+        isDragNewTemplate() {
+            return Boolean(this.dragNewTemplateName != null);
+        },
     },
 
     methods: {
@@ -57,19 +72,44 @@ export default {
         },
 
         onDragStartEditingTemplate(index) {
-            if (this.dragEditItemIndex != index) {
-                this.dragEditItemIndex = index;
+            if (this.dragEditingTemplateIndex != index) {
+                this.dragEditingTemplateIndex = index;
             }
             console.log(index)
         },
 
+        onDragStartNewTemplate(templateName) {
+            this.dragNewTemplateName = templateName;
+        },
+
         onDrop(index) {
-            if (!this.dragEditItemIndex) return false;
-            console.log(index)
-            if (this.dragEditItemIndex != index) {
-                this.templates[this.dragEditItemIndex] = this.templates.splice(index, 1, this.templates[this.dragEditItemIndex])[0];
+            if (this.dragEditingTemplateIndex !== null) {
+                if (this.dragEditingTemplateIndex != index) {
+                    this.templates[this.dragEditingTemplateIndex] = this.templates.splice(index, 1, this.templates[this.dragEditingTemplateIndex])[0];
+                }
+                
+            };
+        },
+
+        onDropNewTemplate(index) {
+            if (this.dragNewTemplateName !== null) {
+                console.log(this.dragNewTemplateName, index);
+                const newTemplate = {
+                    id: `id-${ Math.random() }`,
+                    name: this.dragNewTemplateName,
+                    title: '',
+                    description: '',
+                };
+                this.templates.splice(index, 0, newTemplate);
             }
-            this.dragEditItemIndex = null;
+        },
+
+        onDragEndEditingTemplate() {
+            this.dragEditingTemplateIndex = null;
+        },
+
+        onDragEndNewTemplate() {
+            this.dragNewTemplateName = null;
         }
     },
 

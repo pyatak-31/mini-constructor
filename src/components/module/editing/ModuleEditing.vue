@@ -3,32 +3,46 @@
         Edit block
         <!-- <template v-if="hasTemplates"> -->
             <!-- <transition-group name="list"> -->
-        <module-editing-item
+
+        <div
             v-for="(template, index) in templates"
             :key="template.id"
-            :index="index"
-            :id="template.id"
-            @onDragStart="onDragStart"
-            @onDrop="onDrop"
         >
-            <button
+            <div
+                class="editing__add"
+                :class="{ 'editing__add--drag': isDragNewTemplate }"
                 v-if="index === 0"
-                @click="add(index)"    
-            >+</button>
-            
-            <component
-                :is="template.name"
-                :templateData="template"
-                @onChangeData="changeTemplateData"
-            />
+                @click="add(index)"
+                @drop.prevent="onDropNewTemplate(index)"
+                @dragenter.prevent.stop
+                @dragover.prevent.stop
+            >+</div>
 
-            <button @click="add(index)">+</button>
-        </module-editing-item>
-    <!-- </transition-group> -->
-        <!-- </template> -->
-       
-        <!-- <button @click="change">change</button> -->
-        
+            <module-editing-item
+                :key="template.id"
+                :index="index"
+                :id="template.id"
+                :isDragEditingTemplate="isDragEditingTemplate"
+                @onDragStart="onDragStart"
+                @onDrop="onDrop"
+                @onDragEnd="onDragEndEditingTemplate"
+            >
+                <component
+                    :is="template.name"
+                    :templateData="template"
+                    @onChangeData="changeTemplateData"
+                />  
+            </module-editing-item>
+            
+            <button
+                class="editing__add"
+                :class="{ 'editing__add--drag': isDragNewTemplate }"
+                @click="add(index + 1)"
+                @drop.prevent="onDropNewTemplate(index + 1)"
+                @dragenter.prevent.stop
+                @dragover.prevent.stop    
+            >+</button>
+        </div>
     </div>
 </template>
 
@@ -41,17 +55,24 @@
             ModuleText: () => import('@/components/module/text/ModuleText.vue'),
         },
 
+        data() {
+            return {
+                isDragOver: false
+            }
+        },
+
         props: {
             templates: {
                 type: Array,
                 default: () => []
-            }
+            },
+            
+            isDragEditingTemplate: Boolean,
+            isDragNewTemplate: Boolean,
         },
         
         computed: {
-            tmplts() {
-                return this.templates;
-            }
+            
         },
 
         methods: {
@@ -66,16 +87,41 @@
 
             onDrop(index) {
                 this.$emit('onDrop', index);
+                this.isDragOver = false;
             },
 
             add(id) {
                 console.log(id);
             },
+
+            onDropNewTemplate(index) {
+                console.log(index);
+                this.$emit('onDropNewTemplate', index);
+            },
+
+            onDragEndEditingTemplate() {
+                this.$emit('onDragEndEditingTemplate');
+            }
         },
     }
 </script>
 
 <style lang="scss" scoped>
+    .editing {
+
+
+        &__add {
+            width: 100%;
+            height: 100px;
+            border: 2px solid transparent;
+
+            &--drag {
+                border-color: $info;
+            }
+        }
+    }
+
+
 .list-item {
   display: inline-block;
   margin-right: 10px;

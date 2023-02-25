@@ -1,10 +1,13 @@
 <template>
     <div
+        class="editing-template"
+        :class="{ 'editing-template--drag': isDragEditingTemplate }"
         draggable="true"
         @dragstart="onDragStart($event)"
-        @drop.prevent.stop="onDrop($event)"
+        @drop.prevent="onDrop($event)"
+        @dragend="onDragEnd"
         @dragenter.prevent.stop
-        @dragover.prevent.stop=onDragOver
+        @dragover.prevent.stop
     >
         <!-- <div v-if="index === 0">+</div> -->
         <slot />
@@ -19,6 +22,7 @@
         props: {
             index: Number,
             id: String,
+            isDragEditingTemplate: Boolean
         },
 
         data() {
@@ -31,32 +35,27 @@
         methods: {
             
 
-            onDragStart(event) {
+            onDragStart() {
                 this.$emit('onDragStart', this.index);
             },
 
-            onDrop(event) {
+            onDrop() {
                 this.$emit('onDrop', this.index);
             },
 
-            onDragOver(event) {
-                // const id = event.dataTransfer.getData('text/templateId');
-                
-                // if (id !== this.dropId) {
-                //     this.isChanged = true;
-                //     this.dropId = id;
-                // } else {
-                //     this.isChanged = false;
-                // }
-                // if (this.isChanged) {
-                //     console.log(this.dropId);
-                //     console.log(this.id);
-                // }
+            onDragEnd() {
+                this.$emit('onDragEnd');
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    .editing-template {
+        border: 2px solid transparent;
 
+        &--drag {
+            border-color: $success;
+        }
+    }
 </style>
