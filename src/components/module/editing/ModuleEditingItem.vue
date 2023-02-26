@@ -3,9 +3,9 @@
         class="editing-template"
         :class="{ 'editing-template--drag': isDragEditingTemplate }"
         draggable="true"
-        @dragstart="onDragStart($event)"
-        @drop.prevent="onDrop($event)"
-        @dragend="onDragEnd"
+        @dragstart="onDragStartEditingTemplate"
+        @drop.prevent="onDropEditingTemplate"
+        @dragend="onDragEndEditingTemplate"
         @dragenter.prevent.stop
         @dragover.prevent.stop
     >
@@ -16,36 +16,51 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+    
     export default {
         name: 'ModuleEditingItem',
 
         props: {
             index: Number,
             id: String,
-            isDragEditingTemplate: Boolean
+            // isDragEditingTemplate: Boolean
         },
 
-        data() {
-            return {
-                dropId: null,
-                isChanged: false
-            }
+        computed: {
+            ...mapState('templates', {
+                templates: 'templates',
+                dragEditingTemplateIndex: 'dragEditingTemplateIndex',
+            }),
+
+            ...mapGetters('templates', {
+                isDragEditingTemplate: 'isDragEditingTemplate',
+            }),
         },
 
         methods: {
-            
 
-            onDragStart() {
-                this.$emit('onDragStart', this.index);
+            ...mapMutations('templates', {
+                setDragEditingTemplateIndex: 'setDragEditingTemplateIndex'
+            }),
+
+            onDragStartEditingTemplate() {
+                if (this.dragEditingTemplateIndex != this.index) {
+                    this.setDragEditingTemplateIndex(this.index);
+                }
             },
 
-            onDrop() {
-                this.$emit('onDrop', this.index);
+            onDropEditingTemplate() {
+                if (this.dragEditingTemplateIndex !== null) {
+                    if (this.dragEditingTemplateIndex != this.index) {
+                        this.templates[this.dragEditingTemplateIndex] = this.templates.splice(this.index, 1, this.templates[this.dragEditingTemplateIndex])[0];
+                    }
+                };
             },
 
-            onDragEnd() {
-                this.$emit('onDragEnd');
-            }
+            onDragEndEditingTemplate() {
+                this.setDragEditingTemplateIndex(null);
+            },
         }
     }
 </script>

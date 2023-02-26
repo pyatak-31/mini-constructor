@@ -14,7 +14,7 @@ const mock = [
 ]
 
 export default ({
-    templates: JSON.parse(localStorage.getItem('templates')) || [],
+    templates: JSON.parse(localStorage.getItem('templates')) || mock,
     dragEditingTemplateIndex: null,
     dragNewTemplateName: null,
 });

@@ -1,6 +1,6 @@
 export default ({
-    saveTemplates({ commit }, templates) {
-        commit('setTemplates', templates);
-        localStorage.setItem('templates', JSON.stringify(templates));
+    saveTemplates({ state, commit }, templates) {
+        // commit('setTemplates', templates);
+        localStorage.setItem('templates', JSON.stringify(state.templates));
     },
 });

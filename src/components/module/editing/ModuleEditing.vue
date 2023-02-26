@@ -17,10 +17,6 @@
                 :key="template.id"
                 :index="index"
                 :id="template.id"
-                :isDragEditingTemplate="isDragEditingTemplate"
-                @onDragStart="onDragStartEditingTemplate"
-                @onDrop="onDropEditingTemplate"
-                @onDragEnd="onDragEndEditingTemplate"
             >
                 <component
                     :is="template.name"
@@ -49,52 +45,20 @@
             ModuleAddTemplate: () => import('@/components/module/editing/ModuleAddTemplate.vue'),
         },
 
-        props: {
-           
-        },
+        props: {},
         
         computed: {
             ...mapState('templates', {
                 templates: 'templates',
-                dragEditingTemplateIndex: 'dragEditingTemplateIndex',
-                dragNewTemplateName: 'dragNewTemplateName',
-
-            }),
-
-            ...mapGetters('templates', {
-                isDragEditingTemplate: 'isDragEditingTemplate',
             }),
         },
 
         methods: {
-            ...mapMutations('templates', {
-                setDragEditingTemplateIndex: 'setDragEditingTemplateIndex'
-            }),
+            ...mapMutations('templates', {}),
 
             changeTemplateData(data) {
                 const index = this.templates.findIndex(template => template.id === data.id);
                 this.templates.splice(index, 1, data);
-            },
-
-            onDragStartEditingTemplate(index) {
-                if (this.dragEditingTemplateIndex != index) {
-                    this.setDragEditingTemplateIndex(index);
-                    // this.dragEditingTemplateIndex = index;
-                }
-                console.log(index)
-            },
-
-            onDropEditingTemplate(index) {
-                if (this.dragEditingTemplateIndex !== null) {
-                    if (this.dragEditingTemplateIndex != index) {
-                        this.templates[this.dragEditingTemplateIndex] = this.templates.splice(index, 1, this.templates[this.dragEditingTemplateIndex])[0];
-                    }
-                    
-                };
-            },
-
-            onDragEndEditingTemplate() {
-                this.setDragEditingTemplateIndex(null);
             },
         },
     }
