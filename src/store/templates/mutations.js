@@ -20,7 +20,7 @@ export default ({
         state.dragEditingTemplateIndex = index;
     },
 
-    setDragNewTemplateIndex(state, index) {
-        state.dragNewTemplateName = index;
+    setDragNewTemplateOptions(state, options) {
+        state.dragNewTemplateOptions = options;
     },
 });

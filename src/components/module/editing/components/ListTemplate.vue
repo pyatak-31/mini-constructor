@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li>
-            <ui-input
+            <!-- <ui-input
                 :id="`title_${ templateData.id }`"
                 label="Заголовок"
                 v-model="moduleData.title"
@@ -12,7 +12,8 @@
                 :id="`description_${ templateData.id }`"
                 label="Описание"
                 v-model="moduleData.description"
-            />
+            /> -->
+            123
         </li>
     </ul>
 </template>
@@ -20,6 +21,12 @@
 <script>
     export default {
         name: 'ListTemplate',
+
+        props: {
+            templateData: {
+                type: Object,
+            }
+        },
 
         components: {
             UiInput: () => import('@/components/ui/input/UiInput.vue'),

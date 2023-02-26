@@ -2,12 +2,7 @@
     <aside class="options">
         Sidebar
 
-        <div
-            class="template__item"
-            draggable="true"
-            @dragstart="onDragStartNewTemplate('TextTemplate')"
-            @dragend="onDragEndNewTemplate"
-        ></div>
+        <template-select-list />
 
         <ui-button
             theme="success"
@@ -30,6 +25,7 @@
         components: {
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
+            TemplateSelectList: () => import('@/components/module/options/components/TemplateSelectList.vue'),
         },
 
         methods: {

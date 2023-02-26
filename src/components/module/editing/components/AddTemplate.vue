@@ -21,7 +21,7 @@
 
         computed: {
             ...mapState('templates', {
-                dragNewTemplateName: 'dragNewTemplateName',
+                dragNewTemplateOptions: 'dragNewTemplateOptions',
             }),
 
             ...mapGetters('templates', {
@@ -39,22 +39,11 @@
             },
 
             onDropNewTemplate() {
-                if (this.dragNewTemplateName !== null) {
-                    const newTemplate = this.getNewTemplateObject();
-                    this.addTemplate({ index: this.index, newTemplate });
-                }
-            },
-
-            getNewTemplateObject() {
-                switch (this.dragNewTemplateName) {
-                    case ('TextTemplate'):
-                        return {
-                            id: `id-${ Math.random() }`,
-                            name: this.dragNewTemplateName,
-                            title: '',
-                            description: '',
-                        };
-                        break;
+                if (this.dragNewTemplateOptions !== null) {
+                    this.addTemplate({
+                        index: this.index,
+                        newTemplate: new this.dragNewTemplateOptions.Data
+                    });
                 }
             },
         }

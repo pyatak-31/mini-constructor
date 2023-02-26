@@ -6,8 +6,8 @@
         @dragstart="onDragStartEditingTemplate"
         @drop.prevent="onDropEditingTemplate"
         @dragend="onDragEndEditingTemplate"
-        @dragenter.prevent.stop
-        @dragover.prevent.stop
+        @dragenter.prevent
+        @dragover.prevent
     >
         <slot />
     </div>
