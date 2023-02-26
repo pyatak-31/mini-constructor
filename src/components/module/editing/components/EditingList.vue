@@ -36,8 +36,8 @@
 
         components: {
             EditingItem: () => import('@/components/module/editing/components/EditingItem.vue'),
-            TextTemplate: () => import('@/components/module/editing/components/TextTemplate.vue'),
-            ListTemplate: () => import('@/components/module/editing/components/ListTemplate.vue'),
+            TextTemplate: () => import('@/components/module/editing/components/templates/TextTemplate.vue'),
+            ListTemplate: () => import('@/components/module/editing/components/templates/list/ListTemplate.vue'),
             AddTemplate: () => import('@/components/module/editing/components/AddTemplate.vue'),
         },
         

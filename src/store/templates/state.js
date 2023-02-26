@@ -11,24 +11,30 @@ const mock = [
         title: 'Title1',
         description: 'Description',
     }
-]
+];
 
-class TextTemplate {
+class BaseTemplate {
     constructor() {
         this.id = `id-${ Math.random() }`;
+    }
+}
+
+class TextTemplate extends BaseTemplate {
+    constructor() {
+        super();
         this.name = 'TextTemplate';
         this.title = '';
         this.description = '';
     }
 };
 
-class ListTemplate {
+class ListTemplate extends BaseTemplate {
     constructor() {
-        this.id = `id-${ Math.random() }`;
+        super();
         this.name = 'ListTemplate';
         this.list = [];
     }
-}
+};
 
 export default ({
     templates: JSON.parse(localStorage.getItem('templates')) || [],

@@ -2,17 +2,17 @@
     <ul class="template-select-list">
         <li
             class="template-select-list__item"
-            v-for="template in templates"
-            :key="`select${ template.name }`"
+            v-for="{ name, iconName, Data } in templates"
+            :key="`select${ name }`"
             draggable="true"
-            @dragstart="onDragStartNewTemplate({ name: template.name, Data: template.Data })"
+            @dragstart="onDragStartNewTemplate({ name, Data })"
             @dragend="onDragEndNewTemplate"
             @dragenter.prevent
             @dragover.prevent
             @drop.prevent
             @click="1" 
         >
-            {{ template.iconName }}
+            {{ iconName }}
         </li>
     </ul>
 </template>
