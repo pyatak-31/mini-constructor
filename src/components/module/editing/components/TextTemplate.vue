@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <div>
         <ui-input
             :id="`title_${ templateData.id }`"
             label="Заголовок"
@@ -12,12 +12,12 @@
             label="Описание"
             v-model="moduleData.description"
         />
-    </section>
+    </div>
 </template>
 
 <script>
     export default {
-        name: 'ModuleText',
+        name: 'TextTemplate',
         
         components: {
             UiInput: () => import('@/components/ui/input/UiInput.vue'),

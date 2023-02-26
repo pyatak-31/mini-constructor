@@ -5,7 +5,7 @@
         <div
             class="template__item"
             draggable="true"
-            @dragstart="onDragStartNewTemplate('ModuleText')"
+            @dragstart="onDragStartNewTemplate('TextTemplate')"
             @dragend="onDragEndNewTemplate"
         ></div>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+    import { mapActions, mapMutations } from 'vuex';
 
     export default {
         name: 'ModuleOptions',
@@ -30,21 +30,6 @@
         components: {
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
-        },
-
-        data() {
-            return {
-                templates: [
-                    {
-                        id: 1,
-                        name: 'ModuleText',
-                    }
-                ],
-            }
-        },
-
-        computed: {
-            
         },
 
         methods: {

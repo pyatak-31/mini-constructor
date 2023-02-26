@@ -9,27 +9,22 @@
         @dragenter.prevent.stop
         @dragover.prevent.stop
     >
-        <!-- <div v-if="index === 0">+</div> -->
         <slot />
-        <!-- <button @click="add">+</button> -->
     </div>
 </template>
 
 <script>
-    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+    import { mapGetters, mapState, mapMutations } from 'vuex';
     
     export default {
-        name: 'ModuleEditingItem',
+        name: 'EditingItem',
 
         props: {
             index: Number,
-            id: String,
-            // isDragEditingTemplate: Boolean
         },
 
         computed: {
             ...mapState('templates', {
-                templates: 'templates',
                 dragEditingTemplateIndex: 'dragEditingTemplateIndex',
             }),
 
@@ -39,9 +34,9 @@
         },
 
         methods: {
-
             ...mapMutations('templates', {
-                setDragEditingTemplateIndex: 'setDragEditingTemplateIndex'
+                setDragEditingTemplateIndex: 'setDragEditingTemplateIndex',
+                replaceTemplate: 'replaceTemplate'
             }),
 
             onDragStartEditingTemplate() {
@@ -51,10 +46,8 @@
             },
 
             onDropEditingTemplate() {
-                if (this.dragEditingTemplateIndex !== null) {
-                    if (this.dragEditingTemplateIndex != this.index) {
-                        this.templates[this.dragEditingTemplateIndex] = this.templates.splice(this.index, 1, this.templates[this.dragEditingTemplateIndex])[0];
-                    }
+                if (this.dragEditingTemplateIndex !== null && this.dragEditingTemplateIndex != this.index) {
+                    this.replaceTemplate(this.index);
                 };
             },
 

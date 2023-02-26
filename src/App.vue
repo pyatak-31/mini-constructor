@@ -1,33 +1,20 @@
 <template>
   <div id="app">
     <div class="constructor">
-        <module-sidebar
-            class="constructor__options"
-        />
+        <module-sidebar class="constructor__options" />
        
-        <module-editing
-            class="constructor__editing"    
-        />
+        <module-editing class="constructor__editing" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
-
 export default {
     name: 'App',
+    
     components: {
         ModuleSidebar: () => import('@/components/module/options/ModuleOptions.vue'),
         ModuleEditing: () => import('@/components/module/editing/ModuleEditing.vue')
-    },
-
-    computed: {
-        ...mapState('templates', { templates: 'templates' }),
-        
-        hasTemplates() {
-            return Boolean(this.templates.length);
-        },
     },
 }
 </script>

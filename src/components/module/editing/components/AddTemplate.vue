@@ -10,10 +10,10 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+    import { mapGetters, mapState, mapMutations } from 'vuex';
     
     export default {
-        name: 'ModuleAddTemplate',
+        name: 'AddTemplate',
 
         props: {
             index: Number,
@@ -40,13 +40,21 @@
 
             onDropNewTemplate() {
                 if (this.dragNewTemplateName !== null) {
-                    const newTemplate = {
-                        id: `id-${ Math.random() }`,
-                        name: this.dragNewTemplateName,
-                        title: '',
-                        description: '',
-                    };
+                    const newTemplate = this.getNewTemplateObject();
                     this.addTemplate({ index: this.index, newTemplate });
+                }
+            },
+
+            getNewTemplateObject() {
+                switch (this.dragNewTemplateName) {
+                    case ('TextTemplate'):
+                        return {
+                            id: `id-${ Math.random() }`,
+                            name: this.dragNewTemplateName,
+                            title: '',
+                            description: '',
+                        };
+                        break;
                 }
             },
         }
