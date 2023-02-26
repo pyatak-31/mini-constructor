@@ -8,15 +8,10 @@
             v-for="(template, index) in templates"
             :key="template.id"
         >
-            <div
-                class="editing__add"
-                :class="{ 'editing__add--drag': isDragNewTemplate }"
+            <module-add-template
                 v-if="index === 0"
-                @click="add(index)"
-                @drop.prevent="onDropNewTemplate(index)"
-                @dragenter.prevent.stop
-                @dragover.prevent.stop
-            >+</div>
+                :index="index"
+            />
 
             <module-editing-item
                 :key="template.id"
@@ -33,17 +28,12 @@
                     @onChangeData="changeTemplateData"
                 />  
             </module-editing-item>
-            
-            <button
-                class="editing__add"
-                :class="{ 'editing__add--drag': isDragNewTemplate }"
-                @click="add(index + 1)"
-                @drop.prevent="onDropNewTemplate(index + 1)"
-                @dragenter.prevent.stop
-                @dragover.prevent.stop    
-            >+</button>
+
+            <module-add-template
+                :index="index + 1"
+            />
         </div>
-        {{ isDragNewTemplate }}
+        <!-- </transition-group> -->
     </div>
 </template>
 
@@ -56,6 +46,7 @@
         components: {
             ModuleEditingItem: () => import('@/components/module/editing/ModuleEditingItem.vue'),
             ModuleText: () => import('@/components/module/text/ModuleText.vue'),
+            ModuleAddTemplate: () => import('@/components/module/editing/ModuleAddTemplate.vue'),
         },
 
         props: {
@@ -72,7 +63,6 @@
 
             ...mapGetters('templates', {
                 isDragEditingTemplate: 'isDragEditingTemplate',
-                isDragNewTemplate: 'isDragNewTemplate',
             }),
         },
 
@@ -106,23 +96,6 @@
             onDragEndEditingTemplate() {
                 this.setDragEditingTemplateIndex(null);
             },
-
-            onDropNewTemplate(index) {
-                if (this.dragNewTemplateName !== null) {
-                    const newTemplate = {
-                        id: `id-${ Math.random() }`,
-                        name: this.dragNewTemplateName,
-                        title: '',
-                        description: '',
-                    };
-                    this.templates.splice(index, 0, newTemplate);
-                }
-            },
-            
-            add(id) {
-                console.log(id);
-            },
-           
         },
     }
 </script>
