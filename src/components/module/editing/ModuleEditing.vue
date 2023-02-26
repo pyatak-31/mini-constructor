@@ -23,8 +23,8 @@
                 :index="index"
                 :id="template.id"
                 :isDragEditingTemplate="isDragEditingTemplate"
-                @onDragStart="onDragStart"
-                @onDrop="onDrop"
+                @onDragStart="onDragStartEditingTemplate"
+                @onDrop="onDropEditingTemplate"
                 @onDragEnd="onDragEndEditingTemplate"
             >
                 <component
@@ -43,10 +43,13 @@
                 @dragover.prevent.stop    
             >+</button>
         </div>
+        {{ isDragNewTemplate }}
     </div>
 </template>
 
 <script>
+    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+    
     export default {
         name: 'ModuleEditing',
 
@@ -55,53 +58,71 @@
             ModuleText: () => import('@/components/module/text/ModuleText.vue'),
         },
 
-        data() {
-            return {
-                isDragOver: false
-            }
-        },
-
         props: {
-            templates: {
-                type: Array,
-                default: () => []
-            },
-            
-            isDragEditingTemplate: Boolean,
-            isDragNewTemplate: Boolean,
+           
         },
         
         computed: {
-            
+            ...mapState('templates', {
+                templates: 'templates',
+                dragEditingTemplateIndex: 'dragEditingTemplateIndex',
+                dragNewTemplateName: 'dragNewTemplateName',
+
+            }),
+
+            ...mapGetters('templates', {
+                isDragEditingTemplate: 'isDragEditingTemplate',
+                isDragNewTemplate: 'isDragNewTemplate',
+            }),
         },
 
         methods: {
+            ...mapMutations('templates', {
+                setDragEditingTemplateIndex: 'setDragEditingTemplateIndex'
+            }),
+
             changeTemplateData(data) {
                 const index = this.templates.findIndex(template => template.id === data.id);
                 this.templates.splice(index, 1, data);
             },
 
-            onDragStart(index) {
-                this.$emit('onDragStart', index);
+            onDragStartEditingTemplate(index) {
+                if (this.dragEditingTemplateIndex != index) {
+                    this.setDragEditingTemplateIndex(index);
+                    // this.dragEditingTemplateIndex = index;
+                }
+                console.log(index)
             },
 
-            onDrop(index) {
-                this.$emit('onDrop', index);
-                this.isDragOver = false;
-            },
-
-            add(id) {
-                console.log(id);
-            },
-
-            onDropNewTemplate(index) {
-                console.log(index);
-                this.$emit('onDropNewTemplate', index);
+            onDropEditingTemplate(index) {
+                if (this.dragEditingTemplateIndex !== null) {
+                    if (this.dragEditingTemplateIndex != index) {
+                        this.templates[this.dragEditingTemplateIndex] = this.templates.splice(index, 1, this.templates[this.dragEditingTemplateIndex])[0];
+                    }
+                    
+                };
             },
 
             onDragEndEditingTemplate() {
-                this.$emit('onDragEndEditingTemplate');
-            }
+                this.setDragEditingTemplateIndex(null);
+            },
+
+            onDropNewTemplate(index) {
+                if (this.dragNewTemplateName !== null) {
+                    const newTemplate = {
+                        id: `id-${ Math.random() }`,
+                        name: this.dragNewTemplateName,
+                        title: '',
+                        description: '',
+                    };
+                    this.templates.splice(index, 0, newTemplate);
+                }
+            },
+            
+            add(id) {
+                console.log(id);
+            },
+           
         },
     }
 </script>

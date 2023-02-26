@@ -5,8 +5,8 @@
         <div
             class="template__item"
             draggable="true"
-            @dragstart="onDragStart"
-            @dragend="onDragEnd"
+            @dragstart="onDragStartNewTemplate('ModuleText')"
+            @dragend="onDragEndNewTemplate"
         ></div>
 
         <ui-button
@@ -18,11 +18,12 @@
             </template>
             Save
         </ui-button>
-        
     </aside>
 </template>
 
 <script>
+    import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
+
     export default {
         name: 'ModuleOptions',
         
@@ -42,18 +43,26 @@
             }
         },
 
+        computed: {
+            
+        },
+
         methods: {
-            saveTemplates() {
-                this.$emit('onSaveTemplate');
+            ...mapActions('templates', {
+                saveTemplates: 'saveTemplates'
+            }),
+
+            ...mapMutations('templates', {
+                setDragNewTemplateIndex: 'setDragNewTemplateIndex'
+            }),
+
+            onDragStartNewTemplate(templateName) {
+                this.setDragNewTemplateIndex(templateName);
             },
 
-            onDragStart() {
-                this.$emit('onDragStart', 'ModuleText');
+            onDragEndNewTemplate() {
+                this.setDragNewTemplateIndex(null);
             },
-
-            onDragEnd() {
-                this.$emit('onDragEnd');
-            }
         }
     }
 </script>
