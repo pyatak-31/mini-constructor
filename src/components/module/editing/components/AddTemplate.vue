@@ -19,6 +19,12 @@
             index: Number,
         },
 
+        data() {
+            return {
+                isSelectMode: false,
+            }
+        },
+
         computed: {
             ...mapState('templates', {
                 dragNewTemplateOptions: 'dragNewTemplateOptions',
@@ -31,11 +37,17 @@
 
         methods: {
             ...mapMutations('templates', {
-                addTemplate: 'addTemplate'
+                addTemplate: 'addTemplate',
+                setNewTemplateIndex: 'setNewTemplateIndex',
             }),
 
             add() {
-                console.log(this.index);
+                this.isSelectMode = !this.isSelectMode;
+                if (this.isSelectMode) {
+                    this.setNewTemplateIndex(this.index);
+                } else {
+                    this.setNewTemplateIndex(null);
+                }
             },
 
             onDropNewTemplate() {

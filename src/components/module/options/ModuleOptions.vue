@@ -2,7 +2,7 @@
     <aside class="options">
         Sidebar
 
-        <template-select-list />
+        <template-select-list  />
 
         <ui-button
             theme="success"
@@ -25,7 +25,7 @@
         components: {
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
-            TemplateSelectList: () => import('@/components/module/options/components/TemplateSelectList.vue'),
+            TemplateSelectList: () => import('@/components/module/template-select-list/TemplateSelectList.vue'),
         },
 
         methods: {

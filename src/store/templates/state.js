@@ -43,6 +43,8 @@ export default ({
     
     dragNewTemplateOptions: null,
 
+    newTemplateIndex: null,
+
     templatesForSelection: [
         {
             name: 'TextTemplate',

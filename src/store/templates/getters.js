@@ -4,4 +4,6 @@ export default ({
     isDragEditingTemplate: (state) => Boolean(state.dragEditingTemplateIndex != null),
     
     isDragNewTemplate: (state) => Boolean(state.dragNewTemplateOptions != null),
+
+    hasNewTemplateIndex: (state) => Boolean(state.newTemplateIndex != null),
 });

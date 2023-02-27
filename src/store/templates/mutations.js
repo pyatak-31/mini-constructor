@@ -23,4 +23,8 @@ export default ({
     setDragNewTemplateOptions(state, options) {
         state.dragNewTemplateOptions = options;
     },
+
+    setNewTemplateIndex(state, index) {
+        state.newTemplateIndex = index;
+    },
 });
