@@ -43,15 +43,14 @@
             ...mapMutations('templates', {
                 setDragNewTemplateOptions: 'setDragNewTemplateOptions',
                 addTemplate: 'addTemplate',
+                setNewTemplateIndex: 'setNewTemplateIndex',
             }),
 
             onDragStartNewTemplate(templateOptions) {
-                
                 this.setDragNewTemplateOptions(templateOptions);
             },
 
             onDragEndNewTemplate() {
-                
                 this.setDragNewTemplateOptions(null);
             },
 
@@ -60,6 +59,7 @@
                     index: this.newTemplateIndex,
                     newTemplate
                 });
+                this.setNewTemplateIndex(null);
             },
         }
     }

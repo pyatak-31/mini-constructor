@@ -10,6 +10,7 @@
             <add-template :index="0" />
         </div>
         
+        <add-template-modal></add-template-modal>
     </div>
 </template>
 
@@ -20,8 +21,9 @@
         name: 'ModuleEditing',
 
         components: {
-            EditingList: () => import('@/components/module/editing/components/EditingList.vue'),
-            AddTemplate: () => import('@/components/module/editing/components/AddTemplate.vue'),
+            EditingList: () => import('./components/EditingList.vue'),
+            AddTemplate: () => import('./components/AddTemplate.vue'),
+            AddTemplateModal: () => import('./components/AddTemplateModal.vue'),
         },
         
         computed: {

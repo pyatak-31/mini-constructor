@@ -2,7 +2,7 @@
     <aside class="options">
         Sidebar
 
-        <template-select-list  />
+        <template-select-list draggable />
 
         <ui-button
             theme="success"
