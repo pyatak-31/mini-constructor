@@ -7,6 +7,10 @@ export default ({
         state.templates.splice(index, 0, newTemplate);
     },
 
+    deleteTemplate(state, index) {
+        state.templates.splice(index, 1);
+    },
+
     replaceTemplate(state, index) {
         state.templates[state.dragEditingTemplateIndex] = state.templates.splice(index, 1, state.templates[state.dragEditingTemplateIndex])[0];
     },

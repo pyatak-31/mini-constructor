@@ -1,15 +1,17 @@
 <template>
-    <div>
+    <div class="list-template">
         <ul
             class="list-template__list"
             v-if="moduleData.list.length"
         >
             <list-template-item
                 class="list-template__item"
-                v-for="item in moduleData.list"
+                v-for="(item, index) in moduleData.list"
                 :key="item.id"
                 :data="item"
+                :index="index"
                 @onChangeData="changeModuleData"
+                @onDeleteCard="deleteCard"
             />
 
             <button @click="add">add</button>
@@ -17,7 +19,6 @@
 
         <div v-else>
             Empty
-
             <button @click="add">add</button>
         </div>
     </div>
@@ -70,11 +71,25 @@
             changeModuleData(data) {
                 const index = this.moduleData.list.findIndex(template => template.id === data.id);
                 this.moduleData.list.splice(index, 1, data);
+            },
+
+            deleteCard(index) {
+                this.moduleData.list.splice(index, 1);
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    .list-template {
 
+
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        &__item {}
+    }
 </style>

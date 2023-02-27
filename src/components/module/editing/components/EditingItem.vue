@@ -10,6 +10,15 @@
         @dragover.prevent
     >
         <slot />
+
+        <ui-button
+            class="editing-template__delete-btn"
+            theme="danger"
+            size="small"
+            @onClick="deleteItem" 
+        >
+            X
+        </ui-button>
     </div>
 </template>
 
@@ -18,6 +27,10 @@
     
     export default {
         name: 'EditingItem',
+
+        components: {
+            UiButton: () => import('@/components/ui/button/UiButton.vue'),
+        },
 
         props: {
             index: Number,
@@ -36,7 +49,8 @@
         methods: {
             ...mapMutations('templates', {
                 setDragEditingTemplateIndex: 'setDragEditingTemplateIndex',
-                replaceTemplate: 'replaceTemplate'
+                replaceTemplate: 'replaceTemplate',
+                deleteTemplate: 'deleteTemplate'
             }),
 
             onDragStartEditingTemplate() {
@@ -54,16 +68,28 @@
             onDragEndEditingTemplate() {
                 this.setDragEditingTemplateIndex(null);
             },
+
+            deleteItem() {
+                this.deleteTemplate(this.index);
+            },
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .editing-template {
+        position: relative;
+        padding-top: 50px;
         border: 2px solid transparent;
 
         &--drag {
             border-color: $success;
+        }
+
+        &__delete-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 </style>
