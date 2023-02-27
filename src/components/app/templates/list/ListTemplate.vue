@@ -31,7 +31,7 @@
         components: {
             UiInput: () => import('@/components/ui/input/UiInput.vue'),
             UiTextarea: () => import('@/components/ui/textarea/UiTextarea.vue'),
-            ListTemplateItem: () => import('@/components/module/editing/components/templates/list/ListTemplateItem.vue'),
+            ListTemplateItem: () => import('./ListTemplateItem.vue'),
         },
 
         props: {

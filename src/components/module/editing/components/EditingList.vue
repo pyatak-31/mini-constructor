@@ -36,9 +36,10 @@
 
         components: {
             EditingItem: () => import('@/components/module/editing/components/EditingItem.vue'),
-            TextTemplate: () => import('@/components/module/editing/components/templates/TextTemplate.vue'),
-            ListTemplate: () => import('@/components/module/editing/components/templates/list/ListTemplate.vue'),
+            TextTemplate: () => import('@/components/app/templates/TextTemplate.vue'),
+            ListTemplate: () => import('@/components/app/templates/list/ListTemplate.vue'),
             AddTemplate: () => import('@/components/module/editing/components/AddTemplate.vue'),
+            ModuleMovies: () => import('@/components/module/movies/ModuleMovies.vue'),
         },
         
         computed: {

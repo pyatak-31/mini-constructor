@@ -1,18 +1,3 @@
-const mock = [
-    {
-        id: 'id-' + Math.random() * 300,
-        name: 'TextTemplate',
-        title: 'Title2',
-        description: 'Description',
-    },
-    {
-        id: 'id-' + Math.random() * 300,
-        name: 'TextTemplate',
-        title: 'Title1',
-        description: 'Description',
-    }
-];
-
 class BaseTemplate {
     constructor() {
         this.id = `id-${ Math.random() }`;
@@ -36,6 +21,13 @@ class ListTemplate extends BaseTemplate {
     }
 };
 
+class ModuleMovies extends BaseTemplate {
+    constructor() {
+        super();
+        this.name = 'ModuleMovies';
+    }
+}
+
 export default ({
     templates: JSON.parse(localStorage.getItem('templates')) || [],
     
@@ -56,6 +48,11 @@ export default ({
             iconName: 'L',
             Data: ListTemplate
         },
+        {
+            name: 'ModuleMovies',
+            iconName: 'M',
+            Data: ModuleMovies
+        }
     ]
 });
 
