@@ -1,7 +1,11 @@
 <template>
     <div>
-        <ul v-if="moduleData.list.length">
+        <ul
+            class="list-template__list"
+            v-if="moduleData.list.length"
+        >
             <list-template-item
+                class="list-template__item"
                 v-for="item in moduleData.list"
                 :key="item.id"
                 :data="item"
@@ -54,7 +58,12 @@
 
         methods: {
             add() {
-                this.moduleData.list.push({ id: `listItemId-${ Math.random() }`, text: '' })
+                this.moduleData.list.push({
+                    id: `listItemId-${ Math.random() }`,
+                    title: '',
+                    description: '',
+                    iconName: ''
+                });
             },
 
             // TODO use function
