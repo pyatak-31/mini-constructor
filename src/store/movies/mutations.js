@@ -3,7 +3,19 @@ export default ({
         state.movies = movies;
     },
 
-    setError(state, error) {
+    addError(state, error) {
         state.error = error;
-    }
+    },
+
+    clearError(state) {
+        state.error = null;
+    },
+
+    startLoading(state) {
+        state.isLoading = true;
+    },
+
+    completeLoading(state) {
+        state.isLoading = false;
+    },
 });
