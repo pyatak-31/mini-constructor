@@ -1,16 +1,13 @@
 <template>
     <div class="editing" >
-        Edit block
-        
-        <editing-list v-if="hasTemplates" />
+        <div class="container">
+            <editing-list v-if="hasTemplates" />
+            
+            <empty-list v-else />
+            
+            <add-template-modal></add-template-modal>
 
-        <div v-else>
-            <span >Empty</span>
-
-            <add-template :index="0" />
         </div>
-        
-        <add-template-modal></add-template-modal>
     </div>
 </template>
 
@@ -22,8 +19,8 @@
 
         components: {
             EditingList: () => import('./components/EditingList.vue'),
-            AddTemplate: () => import('./components/AddTemplate.vue'),
             AddTemplateModal: () => import('./components/AddTemplateModal.vue'),
+            EmptyList: () => import('./components/EmptyList.vue'),
         },
         
         computed: {
@@ -35,5 +32,5 @@
 </script>
 
 <style lang="scss" scoped>
-    
+    // .editing {}
 </style>

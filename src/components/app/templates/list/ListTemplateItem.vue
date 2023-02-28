@@ -1,38 +1,52 @@
 <template>
     <li class="list-template-item">
-        <ui-input
-            :id="`title_${ data.id }`"
-            label="Заголовок"
-            v-model="moduleData.title"
-        />
+        <ui-button
+            class="list-template-item__delete-btn"
+            theme="danger"
+            size="small"
+            title="Удалить"
+            @onClick="deleteItem" 
+        >
+            X
+        </ui-button>
         
-        <ui-textarea
-            rows="5"
-            :id="`description_${ data.id }`"
-            label="Описание"
-            v-model="moduleData.description"
-        />
+        <div class="list-template-item__body">
+            <ui-input
+                :id="`title_${ data.id }`"
+                label="Заголовок"
+                v-model="moduleData.title"
+            />
+            
+            <ui-textarea
+                rows="5"
+                :id="`description_${ data.id }`"
+                label="Описание"
+                v-model="moduleData.description"
+            />
+    
+            <i v-if="moduleData.iconName" class="list-template-item__icon">
+                <ui-icon :name="moduleData.iconName" />
+            </i>
 
-        <i v-if="moduleData.iconName" class="list-template-item__icon">
-            <ui-icon :name="moduleData.iconName" />
-        </i>
+            <span
+                class="list-template-item__icon-empty"
+                v-else
+            >
+                Добавьте иконку
+            </span>
+    
+            <add-item
+                class="list-template-item__add-btn"
+                @onAddItem="openModal"
+            />
+        </div>
 
-        <button @click="openModal">add icon+</button>
 
         <list-template-modal
             :isOpenModal="isOpenModal"
             @onClose="closeModal"
             @onSelectIcon="selectIcon"   
         />
-
-        <ui-button
-            class="list-template-item__delete-btn"
-            theme="danger"
-            size="small"
-            @onClick="deleteItem" 
-        >
-            X
-        </ui-button>
     </li>
 </template>
 
@@ -46,6 +60,7 @@
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
             ListTemplateModal: () => import('./ListTemplateModal.vue'),
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
+            AddItem: () => import('./AddItem.vue'),
         },
 
         props: {
@@ -98,20 +113,38 @@
 
 <style lang="scss" scoped>
     .list-template-item {
-        position: relative;
-        padding-top: 50px;
+        display: flex;
+        flex-direction: column;
         border: 2px solid $dark;
+        border-radius: 5px;
+        overflow: hidden;
+
+        &__body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
 
         &__icon {
             display: inline-block;
-            width: 50px;
+            align-self: center;
+            width: 100px;
             color: $dark;
         }
 
+        &__icon-empty {
+            text-align: center;
+            @include font($dark, 12px, 15px, 400);
+        }
+
+        &__add-btn {
+            margin-top: auto;
+        }
+
         &__delete-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
+            align-self: flex-end;
+            border-radius: 0 0 0 5px;
         }
     }
 </style>

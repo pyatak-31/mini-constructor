@@ -2,7 +2,7 @@
     <div class="list-template">
         <ul
             class="list-template__list"
-            v-if="moduleData.list.length"
+            v-if="hasCards"
         >
             <list-template-item
                 class="list-template__item"
@@ -14,13 +14,16 @@
                 @onDeleteCard="deleteCard"
             />
 
-            <button @click="add">add</button>
+            <add-item
+                class="list-template__add-btn"
+                @onAddItem="add"
+            />
         </ul>
 
-        <div v-else>
-            Empty
-            <button @click="add">add</button>
-        </div>
+        <empty-list
+            v-else
+            @onAddCard="add"
+        />
     </div>
 </template>
 
@@ -29,9 +32,9 @@
         name: 'ListTemplate',
         
         components: {
-            UiInput: () => import('@/components/ui/input/UiInput.vue'),
-            UiTextarea: () => import('@/components/ui/textarea/UiTextarea.vue'),
             ListTemplateItem: () => import('./ListTemplateItem.vue'),
+            AddItem: () => import('./AddItem.vue'),
+            EmptyList: () => import('./EmptyList.vue'),
         },
 
         props: {
@@ -45,6 +48,12 @@
                 moduleData: {
                     list: this.templateData.list,
                 }
+            }
+        },
+
+        computed: {
+            hasCards() {
+                return Boolean(this.moduleData.list.length);
             }
         },
 
@@ -67,7 +76,6 @@
                 });
             },
 
-            // TODO use function
             changeModuleData(data) {
                 const index = this.moduleData.list.findIndex(template => template.id === data.id);
                 this.moduleData.list.splice(index, 1, data);
@@ -91,5 +99,10 @@
         }
 
         &__item {}
+
+        &__add-btn {
+            min-width: 300px;
+            min-height: 200px;
+        }
     }
 </style>

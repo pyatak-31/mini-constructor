@@ -90,6 +90,7 @@
         position: relative;
         z-index: 15;
         min-width: 300px;
+        width: 100%;
         max-width: 500px;
         padding: 20px;
         background-color: $white;

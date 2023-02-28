@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <!-- <transition-group name="list"> -->
+    <transition-group
+        name="list"
+        tag="div"
+        class="editing-list"
+    >
         <div
+            class="editing-list__section"
             v-for="(template, index) in templates"
             :key="template.id"
         >
@@ -12,6 +16,7 @@
     
             <editing-item
                 :index="index"
+                :length="templates.length"
             >
                 <component
                     :is="template.name"
@@ -24,8 +29,7 @@
                 :index="index + 1"
             />
         </div>
-        <!-- </transition-group> -->
-    </div>
+    </transition-group>
 </template>
 
 <script>
@@ -61,12 +65,24 @@
 </script>
 
 <style lang="scss" scoped>
+    .editing-list {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        &__section {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+    }
+
     .list-item {
         display: inline-block;
         margin-right: 10px;
     }
     .list-enter-active, .list-leave-active {
-        transition: all 1s;
+        transition: all .5s;
     }
     .list-enter, .list-leave-to {
         opacity: 0;

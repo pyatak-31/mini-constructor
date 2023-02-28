@@ -22,7 +22,16 @@
         data() {
             return {
                 data: [
-                    'save', 'image'
+                    'save',
+                    'image',
+                    'circle-alert',
+                    'circle-check',
+                    'circle-plus',
+                    'circle-help',
+                    'circle-info',
+                    'emoji-sad',
+                    'emoji-smile',
+                    'cirlce-x'
                 ]
             }
         },
@@ -37,10 +46,17 @@
 
 <style lang="scss" scoped>
     .icons-list {
-
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 84px);
+        gap: 10px;
 
         &__item {
-            width: 50px;
+            border-radius: 5px;
+            transition: background-color .3;
+
+            &:hover {
+                background-color: $success-20;
+            }
         }
     }
 </style>
