@@ -1,13 +1,18 @@
 <template>
-    <div class="movies-search">
+    <div class="search">
         <ui-input
+            class="search__field"
+            placeholder="Biutiful"
             v-model="item"
             @keydown.native.enter="itemSearching"
         />
 
         <ui-button
+            theme="info"
             @onClick="itemSearching"
-        >Search</ui-button>
+        >
+            Поиск
+        </ui-button>
     </div>
 </template>
 
@@ -35,9 +40,13 @@
 </script>
 
 <style lang="scss" scoped>
-    .movies-search {
+    .search {
         display: flex;
         align-items: center;
         gap: 20px;
+
+        &__field {
+            flex: 0 1 300px;
+        }
     }
 </style>
