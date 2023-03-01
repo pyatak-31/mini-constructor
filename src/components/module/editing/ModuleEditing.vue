@@ -1,13 +1,12 @@
 <template>
     <div class="editing" >
-        <div class="container">
+        <app-container>
             <editing-list v-if="hasTemplates" />
             
             <empty-list v-else />
             
             <add-template-modal></add-template-modal>
-
-        </div>
+        </app-container>
     </div>
 </template>
 
@@ -18,6 +17,7 @@
         name: 'ModuleEditing',
 
         components: {
+            AppContainer: () => import('@/components/app/container/AppContainer.vue'),
             EditingList: () => import('./components/EditingList.vue'),
             AddTemplateModal: () => import('./components/AddTemplateModal.vue'),
             EmptyList: () => import('./components/EmptyList.vue'),
@@ -32,5 +32,12 @@
 </script>
 
 <style lang="scss" scoped>
-    // .editing {}
+    .editing {
+        padding: 10px;
+        background-color: $main-bg;
+
+        @media (min-width: $sm) {
+            padding: 30px;
+        }
+    }
 </style>

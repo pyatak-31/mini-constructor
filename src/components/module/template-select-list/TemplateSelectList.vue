@@ -67,18 +67,12 @@
 
 <style lang="scss" scoped>
     .template-select-list {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 100px);
         gap: 20px;
 
         &__item {
-            width: 50px;
-            height: 50px;
-            background-color: $primary;
-            border: 2px solid transparent;
-
-            &--choice {
-                border-color: $info;
-            }
+            background-color: $info;
         }
 }
 

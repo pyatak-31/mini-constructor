@@ -52,7 +52,8 @@
 
         &__item {
             border-radius: 5px;
-            transition: background-color .3;
+            cursor: pointer;
+            transition: background-color .3s;
 
             &:hover {
                 background-color: $success-20;

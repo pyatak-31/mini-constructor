@@ -1,6 +1,6 @@
 <template>
     <li
-        class="template-select-list__item"
+        class="template-select-item"
         draggable="true"
         @dragstart="onDragStart({ name, Data })"
         @dragend="onDragEnd"
@@ -9,13 +9,17 @@
         @drop.prevent
         @click="onAdd({ name, Data })" 
     >
-        {{ iconName }}
+        <ui-icon :name="iconName"/>
     </li>
 </template>
 
 <script>
     export default {
         name: 'TemplateSelectItem',
+
+        components: {
+            UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
+        },
 
         props: {
             name: String,
@@ -53,5 +57,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .template-select-item {
+        padding: 10px;
+        background-color: $primary-20;
+        border-radius: 5px;
+    }
 </style>

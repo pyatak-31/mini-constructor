@@ -1,9 +1,15 @@
 <template>
     <app-modal
+        class="add-template-modal"
         v-if="isOpenModal"
+        title="Добавить шаблон"
         @onClose="closeModal"    
     >
-        <template-select-list />
+        <h4 class="add-template-modal__title">
+            Выберите шаблон
+        </h4>
+
+        <template-select-list class="add-template-modal__list" />
     </app-modal>
 </template>
 
@@ -37,5 +43,14 @@
 </script>
 
 <style lang="scss" scoped>
+    .add-template-modal {
 
+        &__title {
+            @include font($dark, 18px, 21px, 400);
+        }
+
+        &__list {
+            margin-top: 30px;
+        }
+    }
 </style>

@@ -40,17 +40,17 @@ export default ({
     templatesForSelection: [
         {
             name: 'TextTemplate',
-            iconName: 'T',
+            iconName: 'file-text',
             Data: TextTemplate,
         },
         {
             name: 'ListTemplate',
-            iconName: 'L',
+            iconName: 'cards',
             Data: ListTemplate
         },
         {
             name: 'ModuleMovies',
-            iconName: 'M',
+            iconName: 'movie',
             Data: ModuleMovies
         }
     ]

@@ -94,15 +94,22 @@
 
         &__list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, 1fr);
             gap: 20px;
+
+            @media (min-width: $sm) {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
 
         &__item {}
 
         &__add-btn {
-            min-width: 300px;
-            min-height: 200px;
+            min-height: 100px;
+            
+            @media (min-width: $sm) {
+                min-width: 300px;
+            }
         }
     }
 </style>

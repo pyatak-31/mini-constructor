@@ -15,6 +15,13 @@
         <transition name="modal" appear="">
             <div class="modal" v-if="isOpen">
                 <div class="modal__header">
+                    <h3
+                        class="modal__title"
+                        v-if="title"    
+                    >
+                        {{ title }}
+                    </h3>
+
                     <ui-button
                         class="modal__close-btn"
                         theme="danger"
@@ -24,7 +31,10 @@
                         X
                     </ui-button>
                 </div>
-                <slot />
+
+                <div class="modal__body">
+                    <slot />
+                </div>
             </div>
         </transition>
     </div>
@@ -42,6 +52,10 @@
             return {
                 isOpen: true
             }
+        },
+
+        props: {
+            title: String
         },
 
         methods: {
@@ -92,16 +106,32 @@
         min-width: 300px;
         width: 100%;
         max-width: 500px;
-        padding: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+        // padding: 20px;
         background-color: $white;
         border-radius: 5px;
+        overflow: hidden;
+        box-shadow: $shadow-2;
 
         &__header {
-            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: $grey-2;
+        }
+
+        &__title {
+            @include font($dark, 22px, 25px, 700);
         }
 
         &__close-btn {
             margin-left: auto;
+        }
+
+        &__body {
+            padding: 20px;
+            background-color: $white;
         }
     }
 

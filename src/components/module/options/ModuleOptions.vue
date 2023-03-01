@@ -1,18 +1,29 @@
 <template>
     <aside class="options">
-        Sidebar
-
-        <template-select-list draggable />
-
-        <ui-button
-            theme="success"
-            @onClick="saveTemplates"
+        <app-sticky
+            class="options__wrapper"
+            top="30"
         >
-            <template #left-icon>
-                <ui-icon name="save" />
-            </template>
-            Save
-        </ui-button>
+            <h3 class="options__template-title">
+                Шаблоны
+            </h3>
+
+            <template-select-list
+                class="options__template-select-list"
+                draggable
+            />
+
+            <ui-button
+                class="options__save-btn"
+                theme="success"
+                @onClick="saveTemplates"
+            >
+                <template #left-icon>
+                    <ui-icon name="save" />
+                </template>
+                Save
+            </ui-button>
+        </app-sticky>
     </aside>
 </template>
 
@@ -23,6 +34,7 @@
         name: 'ModuleOptions',
         
         components: {
+            AppSticky: () => import('@/components/app/sticky/AppSticky.vue'),
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
             UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
             TemplateSelectList: () => import('@/components/module/template-select-list/TemplateSelectList.vue'),
@@ -52,18 +64,59 @@
     $width: 300px;
 
     .options {
-        width: $width;
+        position: fixed;
+        bottom: 0;
+        z-index: 5;
+        padding: 30px;
+
+        // @media (min-width: $lg) {
+        // }
+        
+        width: 100%;
+        height: 100px;
         background-color: $white;
-        box-shadow: 0 0 15px -15px $dark;
-    }
+        box-shadow: $shadow-2;
+        
+        @media (min-width: $lg) {
+            position: relative;
+            width: $width;
+            height: auto;
+        }
 
-    .template {
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+            
+            @media (min-width: $lg) {
+                height: calc(100vh - 60px);
+                
+            }
+        }
 
+        &__template-title {
+            display: none;
+            @include font($dark, 25px, 30px, 700);
 
-        &__item {
-            width: 50px;
-            height: 50px;
-            background-color: $primary;
+            @media (min-width: $lg) {
+                display: block;
+            }
+        }
+
+        &__template-select-list {
+
+            &.template-select-list {
+                display: none;
+                margin-top: 30px;
+    
+                @media (min-width: $lg) {
+                    display: grid;
+                }
+                
+            }
+        }
+
+        &__save-btn {
+            margin-top: auto;
         }
     }
 </style>
