@@ -61,7 +61,6 @@
             </p>
         </div>
 
-
         <list-template-modal
             :isOpenModal="isOpenModal"
             @onClose="closeModal"

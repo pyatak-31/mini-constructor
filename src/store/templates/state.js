@@ -57,4 +57,3 @@ export default ({
 
     isEditMode: JSON.parse(localStorage.getItem('isEditMode')) ?? true,
 });
-

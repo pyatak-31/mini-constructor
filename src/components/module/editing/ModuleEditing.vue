@@ -1,11 +1,11 @@
 <template>
-    <div class="editing" >
+    <div class="editing">
         <app-container>
             <editing-list v-if="hasTemplates" />
             
             <empty-list v-else />
             
-            <add-template-modal></add-template-modal>
+            <add-template-modal />
         </app-container>
     </div>
 </template>

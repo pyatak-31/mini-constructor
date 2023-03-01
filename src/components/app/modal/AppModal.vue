@@ -108,7 +108,6 @@
         max-width: 500px;
         margin-right: 10px;
         margin-left: 10px;
-        // padding: 20px;
         background-color: $white;
         border-radius: 5px;
         overflow: hidden;

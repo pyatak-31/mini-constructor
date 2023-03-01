@@ -63,22 +63,24 @@
 </script>
 
 <style lang="scss" scoped>
-    $width: 300px;
-
     .options {
         position: fixed;
         bottom: 0;
         z-index: 5;
         width: 100%;
-        height: 100px;
-        padding: 30px;
+        height: $fixed-menu-height;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: $white;
         box-shadow: $shadow-2;
         
         @media (min-width: $lg) {
             position: relative;
-            width: $width;
+            display: block;
+            width: 300px;
             height: auto;
+            padding: 30px;
         }
 
         &__wrapper {

@@ -47,5 +47,4 @@
             max-width: 100px;
         }
     }
-
 </style>

@@ -20,7 +20,9 @@
             title="Поднять"
             @onClick="replaceFrom(index - 1)"
         >
-            up
+            <template #left-icon>
+                <ui-icon name="arrow-up" />
+            </template>
         </ui-button>    
 
         <div class="editing-template__component">
@@ -35,7 +37,9 @@
             title="Опустить"
             @onClick="replaceFrom(index + 1)"
         >
-            down
+            <template #left-icon>
+                <ui-icon name="arrow-down" />
+            </template>
         </ui-button>
 
         <ui-button
@@ -58,6 +62,7 @@
 
         components: {
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
+            UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
         },
 
         props: {

@@ -9,6 +9,7 @@
             <template #left-icon>
                 <ui-icon :name="isEditMode ? 'eye' : 'pencil'" />
             </template>
+            
             <span>
                 {{ isEditMode ? 'Просмотр' : 'Редактирование' }}
             </span>
@@ -22,6 +23,7 @@
             <template #left-icon>
                 <ui-icon name="save" />
             </template>
+
             <span>
                 Save
             </span>
@@ -71,8 +73,7 @@
                 @media (min-width: $sm) {
                     display: inline-block;   
                 }
-            }
-            
+            }    
         }
     }
 </style>

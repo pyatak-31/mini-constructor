@@ -22,7 +22,6 @@
             :hasMovies="hasMovies"
             :isLoading="isLoadingRecommendationMovies"
         />
-
     </div>
 </template>
 
@@ -70,7 +69,9 @@
                     this.searchError = null;
                     return false;
                 }
+
                 this.isLoadingSearchResult = true;
+
                 const data = await this.searchMovie(movie);
                 if (data.Response === 'True') {
                     this.searchData = data.Search;
@@ -79,6 +80,7 @@
                     this.searchData = [];
                     this.searchError = data.Error;
                 }
+
                 this.isLoadingSearchResult = false;
             }
         },

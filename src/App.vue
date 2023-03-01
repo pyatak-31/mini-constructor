@@ -26,7 +26,7 @@ export default {
         position: relative;
         display: flex;
         min-height: 100vh;
-        padding-bottom: 100px;
+        padding-bottom: $fixed-menu-height;
 
         @media (min-width: $lg) {
             padding-bottom: 0;

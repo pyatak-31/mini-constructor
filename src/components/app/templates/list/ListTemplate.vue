@@ -107,7 +107,7 @@
             }
         }
 
-        &__item {}
+        // &__item {}
 
         &__add-btn {
             min-height: 100px;
