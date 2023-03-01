@@ -12,6 +12,9 @@
             @onClick="itemSearching"
         >
             Поиск
+            <template #right-icon>
+                <ui-loader v-if="isLoading"/>
+            </template>
         </ui-button>
     </div>
 </template>
@@ -23,6 +26,11 @@
         components: {
             UiInput: () => import('@/components/ui/input/UiInput.vue'),
             UiButton: () => import('@/components/ui/button/UiButton.vue'),
+            UiLoader: () => import('@/components/ui/loader/UiLoader.vue'),
+        },
+
+        props: {
+            isLoading: Boolean
         },
 
         data() {

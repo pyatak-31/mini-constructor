@@ -19,7 +19,6 @@ export default ({
             } else {
                 commit('addError', data.Error);
             }
-            console.log(data);
         } catch (error) {
             console.log(error);
         } finally {
@@ -28,7 +27,6 @@ export default ({
     },
 
     async searchMovie({ commit }, movie) {
-        commit('startLoading');
         try {
             const { data } = await axios('http://www.omdbapi.com', {
                 method: 'GET',
@@ -39,11 +37,7 @@ export default ({
             });
             return data;
         } catch (error) {
-            alert(error)
             console.log(error);
-            return error
-        } finally {
-            commit('completeLoading');
         }
     }
 });
