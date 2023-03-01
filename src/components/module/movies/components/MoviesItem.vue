@@ -1,14 +1,18 @@
 <template>
     <li class="movies-item">
         <div class="movies-item__poster">
-            <img v-if="movie.Poster != 'N/A'" :src="movie.Poster" alt="">
+            <img
+                v-if="poster != 'N/A'"
+                :src="poster"
+                alt=""
+            >
 
             <ui-icon v-else name="image" />
         </div>
 
         <div class="movies-item__footer">
             <h4 class="movies-item__title">
-                {{ movie.Title }} ({{ movie.Year }})
+                {{ title }} ({{ year }})
             </h4>
         </div>
     </li>
@@ -23,21 +27,17 @@
         },
 
         props: {
-            movie: {
-                type: Object,
-                default: () => ({})
+            title: {
+                type: String,
+                default: ''
             },
-            // Title: {
-            //     type: String,
-            //     default: ''
-            // },
             
-            // Year,
+            year: [String, Number],
 
-            // Poster: {
-            //     type: String,
-            //     default: ''
-            // }
+            poster: {
+                type: String,
+                default: ''
+            }
         }
     }
 </script>
@@ -53,6 +53,7 @@
         &__poster {
             display: flex;
             height: 300px;
+            background-color: $white;
             
             img {
                 height: 100%;

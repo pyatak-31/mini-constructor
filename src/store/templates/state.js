@@ -53,6 +53,8 @@ export default ({
             iconName: 'movie',
             Data: ModuleMovies
         }
-    ]
+    ],
+
+    isEditMode: JSON.parse(localStorage.getItem('isEditMode')) ?? true,
 });
 

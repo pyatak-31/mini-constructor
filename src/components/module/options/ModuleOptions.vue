@@ -13,31 +13,32 @@
                 draggable
             />
 
-            <ui-button
-                class="options__save-btn"
-                theme="success"
-                @onClick="saveTemplates"
-            >
-                <template #left-icon>
-                    <ui-icon name="save" />
-                </template>
-                Save
-            </ui-button>
+            <options-control
+                class="options__control"
+                :isEditMode="isEditMode"
+                @onSwitchMode="switchMode"
+                @onSaveTemplates="saveTemplates"    
+            />
         </app-sticky>
     </aside>
 </template>
 
 <script>
-    import { mapActions, mapMutations } from 'vuex';
+    import { mapActions, mapMutations, mapState } from 'vuex';
 
     export default {
         name: 'ModuleOptions',
         
         components: {
             AppSticky: () => import('@/components/app/sticky/AppSticky.vue'),
-            UiButton: () => import('@/components/ui/button/UiButton.vue'),
-            UiIcon: () => import('@/components/ui/icon/UiIcon.vue'),
+            OptionsControl: () => import('./components/OptionsControl.vue'),
             TemplateSelectList: () => import('@/components/module/template-select-list/TemplateSelectList.vue'),
+        },
+
+        computed: {
+            ...mapState('templates', {
+                isEditMode: 'isEditMode'
+            })
         },
 
         methods: {
@@ -46,7 +47,8 @@
             }),
 
             ...mapMutations('templates', {
-                setDragNewTemplateIndex: 'setDragNewTemplateIndex'
+                setDragNewTemplateIndex: 'setDragNewTemplateIndex',
+                switchMode: 'switchEditMode'
             }),
 
             onDragStartNewTemplate(templateName) {
@@ -67,13 +69,9 @@
         position: fixed;
         bottom: 0;
         z-index: 5;
-        padding: 30px;
-
-        // @media (min-width: $lg) {
-        // }
-        
         width: 100%;
         height: 100px;
+        padding: 30px;
         background-color: $white;
         box-shadow: $shadow-2;
         
@@ -115,7 +113,7 @@
             }
         }
 
-        &__save-btn {
+        &__control {
             margin-top: auto;
         }
     }

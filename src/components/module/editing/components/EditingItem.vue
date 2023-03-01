@@ -1,8 +1,11 @@
 <template>
     <div
         class="editing-template"
-        :class="{ 'editing-template--drag': isDragEditingTemplate }"
-        draggable="true"
+        :class="{
+            'editing-template--drag': isDragEditingTemplate,
+            'editing-template--view-mode': !isEditMode    
+        }"
+        :draggable="isEditMode"
         @dragstart="onDragStartEditingTemplate"
         @drop.prevent="onDropEditingTemplate"
         @dragend="onDragEndEditingTemplate"
@@ -65,6 +68,7 @@
         computed: {
             ...mapState('templates', {
                 dragEditingTemplateIndex: 'dragEditingTemplateIndex',
+                isEditMode: 'isEditMode',
             }),
 
             ...mapGetters('templates', {
@@ -100,6 +104,9 @@
             },
 
             replaceFrom(targetIndex) {
+                if (!this.isEditMode) {
+                    return false;
+                }
                 this.setDragEditingTemplateIndex(this.index);
                 this.replaceTemplate(targetIndex);
                 this.setDragEditingTemplateIndex(null);
@@ -119,6 +126,17 @@
 
         &--drag {
             border-color: $success;
+        }
+
+        &--view-mode {
+            display: block;
+            border: none;
+
+            .editing-template__up-btn,
+            .editing-template__down-btn,
+            .editing-template__delete-btn {
+                display: none;
+            }
         }
 
         &__component {

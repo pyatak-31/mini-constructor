@@ -60,6 +60,12 @@
     .template-select-item {
         padding: 10px;
         background-color: $primary-20;
+        border: 2px solid transparent;
         border-radius: 5px;
+        transition: border-color .3s;
+
+        &:hover {
+            border-color: $primary;
+        }
     }
 </style>

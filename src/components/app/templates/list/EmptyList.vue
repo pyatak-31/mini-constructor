@@ -1,10 +1,11 @@
 <template>
     <div class="empty-list-template">
         <p class="empty-list-template__description">
-            Начните добавлять карточки
+            {{ isEditMode ? 'Начните добавлять карточки' : 'Карточки отсутствуют' }}
         </p>
 
         <add-item
+            v-if="isEditMode"
             class="empty-list-template__add-btn"
             @onAddItem="add"
         />
@@ -17,6 +18,10 @@
 
         components: {
             AddItem: () => import('./AddItem.vue'),
+        },
+
+        props: {
+            isEditMode: Boolean,
         },
 
         methods: {

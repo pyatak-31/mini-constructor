@@ -31,4 +31,9 @@ export default ({
     setNewTemplateIndex(state, index) {
         state.newTemplateIndex = index;
     },
+
+    switchEditMode(state) {
+        state.isEditMode = !state.isEditMode;
+        localStorage.setItem('isEditMode', JSON.stringify(state.isEditMode));
+    }
 });

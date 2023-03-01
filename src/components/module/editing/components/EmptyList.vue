@@ -1,10 +1,11 @@
 <template>
     <div class="empty-block">
         <p class="empty-block__description">
-            Начните добавлять секции
+            {{ isEditMode ? 'Начните добавлять секции' : 'Пустая страница' }}
         </p>
 
         <add-template
+            v-if="isEditMode"
             class="empty-block__btn"
             :index="0"
         />
@@ -12,12 +13,20 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
         name: 'EmptyList',
 
         components: {
             AddTemplate: () => import('./AddTemplate.vue'),
         },
+
+        computed: {
+            ...mapState('templates', {
+                isEditMode: 'isEditMode'
+            })
+        }
     }
 </script>
 

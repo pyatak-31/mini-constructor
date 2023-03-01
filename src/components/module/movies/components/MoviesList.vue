@@ -2,9 +2,11 @@
     <ul class="movies-list">
         <movies-item
             class="movies-list__item"
-            v-for="movie in movies"
-            :key="movie.imdbID"
-            :movie="movie"
+            v-for="{  Title, Year, Poster, imdbID } in movies"
+            :key="imdbID"
+            :title="Title"
+            :year="Year"
+            :poster="Poster"
         />
     </ul>
 </template>

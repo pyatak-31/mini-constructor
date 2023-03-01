@@ -10,7 +10,7 @@
             :key="template.id"
         >
             <add-template
-                v-if="index === 0"
+                v-if="index === 0 && isEditMode"
                 :index="index"
             />
     
@@ -21,11 +21,13 @@
                 <component
                     :is="template.name"
                     :templateData="template"
+                    :isEditMode="isEditMode"
                     @onChangeData="changeTemplateData"
                 />  
             </editing-item>
     
             <add-template
+                v-if="isEditMode"
                 :index="index + 1"
             />
         </div>
@@ -49,6 +51,7 @@
         computed: {
             ...mapState('templates', {
                 templates: 'templates',
+                isEditMode: 'isEditMode',
             }),
         },
 

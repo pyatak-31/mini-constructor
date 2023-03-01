@@ -10,11 +10,13 @@
                 :key="item.id"
                 :data="item"
                 :index="index"
+                :isEditMode="isEditMode"
                 @onChangeData="changeModuleData"
                 @onDeleteCard="deleteCard"
             />
 
             <add-item
+                v-if="isEditMode"
                 class="list-template__add-btn"
                 @onAddItem="add"
             />
@@ -22,6 +24,7 @@
 
         <empty-list
             v-else
+            :isEditMode="isEditMode"
             @onAddCard="add"
         />
     </div>
@@ -40,7 +43,9 @@
         props: {
             templateData: {
                 type: Object,
-            }
+            },
+
+            isEditMode: Boolean,
         },
 
         data() {

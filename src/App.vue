@@ -25,24 +25,17 @@ export default {
     .constructor {
         position: relative;
         display: flex;
-        // flex-direction: column;
         min-height: 100vh;
         padding-bottom: 100px;
 
         @media (min-width: $lg) {
-            flex-direction: row;
             padding-bottom: 0;
         }
         
-        &__options {
-            
-        }
+        // &__options {}
         
         &__editing {
             flex: 1;
-            padding: $block-padding;
-            background-color: $main-bg;
-            overflow-x: auto;
         }
     }
 </style>

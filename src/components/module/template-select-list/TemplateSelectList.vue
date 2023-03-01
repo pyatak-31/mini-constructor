@@ -31,7 +31,7 @@
         computed: {
             ...mapState('templates', {
                 templates: 'templatesForSelection',
-                newTemplateIndex: 'newTemplateIndex'
+                newTemplateIndex: 'newTemplateIndex',
             }),
 
             ...mapGetters('templates', {
